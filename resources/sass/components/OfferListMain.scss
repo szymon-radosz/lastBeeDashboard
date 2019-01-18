@@ -1,0 +1,22 @@
+.OfferListMainContainer {
+    display: block;
+    overflow-x: scroll;
+
+    .offerTable {
+        .OfferListTableRowTr {
+            background-color: #cccccc85;
+        }
+
+        .OfferListTableRowBrand,
+        .OfferListTableRowImgUrl,
+        .OfferListTableRowPageUrl {
+            width: 100px;
+        }
+
+        .OfferListTableRowDesc,
+        .OfferListTableRowTitle {
+            height: 200px;
+            resize: none;
+        }
+    }
+}

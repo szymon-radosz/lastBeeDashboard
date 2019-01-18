@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+@import "./dashboardTheme";
+/*@import "vendor/font-awesome-4.7/css/font-awesome.min.css";
+@import "vendor/font-awesome-5/css/fontawesome-all.min.css";
+@import "vendor/mdi-font/css/material-design-iconic-font.min.css";
+@import "vendor/bootstrap-4.1/bootstrap.min.css";
+@import "vendor/animsition/animsition.min.css";
+@import "vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css";
+@import "vendor/wow/animate.css";
+@import "vendor/css-hamburgers/hamburgers.min.css";
+@import "vendor/slick/slick.css";
+@import "vendor/select2/select2.min.css";
+@import "vendor/perfect-scrollbar/perfect-scrollbar.css";*/
+@import "./components/OfferListMain";
+@import "global";
+
+.navbar-laravel {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
