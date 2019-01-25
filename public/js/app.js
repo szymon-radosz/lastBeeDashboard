@@ -81125,6 +81125,9 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["Bar"], {
         dataKey: "travelPiratesUS",
         fill: "#2d3dce"
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["Bar"], {
+        dataKey: "secretFlyingUS",
+        fill: "#000"
       })));
     }
   }]);

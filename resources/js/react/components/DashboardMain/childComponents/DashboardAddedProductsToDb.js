@@ -61,6 +61,7 @@ class DashboardAddedProductsToDb extends Component {
                     <Legend />
                     <Bar dataKey="fly4freeUS" fill="#5666f7" />
                     <Bar dataKey="travelPiratesUS" fill="#2d3dce" />
+                    <Bar dataKey="secretFlyingUS" fill="#000" />
                 </BarChart>
             </div>
         );
