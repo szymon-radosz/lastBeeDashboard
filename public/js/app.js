@@ -81180,7 +81180,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
-var appPath = "http://127.0.0.1:8080";
+var appPath = "https://last-bee.com/";
 
 var Main =
 /*#__PURE__*/
