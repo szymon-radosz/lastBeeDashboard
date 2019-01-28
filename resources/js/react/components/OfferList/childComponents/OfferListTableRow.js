@@ -12,6 +12,8 @@ class OfferListTableRow extends Component {
             brand: "",
             type: "",
             status: "",
+            price: "",
+            currency: "",
             id: 0
         };
 
@@ -32,7 +34,9 @@ class OfferListTableRow extends Component {
             img_url: this.props.offer.img_url,
             brand: this.props.offer.brand,
             type: this.props.offer.type,
-            status: this.props.offer.status
+            status: this.props.offer.status,
+            price: this.props.offer.price,
+            currency: this.props.offer.currency
         });
     }
 
@@ -105,6 +109,30 @@ class OfferListTableRow extends Component {
                     </div>
                 </td>
                 <td className="text-center">
+                    <div className="form-group">
+                        <input
+                            name="price"
+                            className="OfferListTableRowBrand form-control"
+                            value={this.state.price}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </td>
+                <td className="text-center">
+                    <div className="form-group ">
+                        <select
+                            name="currency"
+                            className="form-control"
+                            value={this.state.currency}
+                            onChange={this.handleChange}
+                        >
+                            <option>{this.state.currency}</option>
+                            <option>USD</option>
+                            <option>GBP</option>
+                        </select>
+                    </div>
+                </td>
+                <td className="text-center">
                     <div className="form-group ">
                         <select
                             name="status"
@@ -131,7 +159,9 @@ class OfferListTableRow extends Component {
                                 this.state.img_url,
                                 this.state.brand,
                                 this.state.type,
-                                this.state.status
+                                this.state.status,
+                                this.state.price,
+                                this.state.currency
                             )
                         }
                     >

@@ -101,7 +101,9 @@ class OfferListMain extends Component {
         img_url,
         brand,
         type,
-        status
+        status,
+        price,
+        currency
     ) {
         /*console.log([
             id,
@@ -128,7 +130,9 @@ class OfferListMain extends Component {
                     img_url: img_url,
                     brand: brand,
                     type: type,
-                    status: status
+                    status: status,
+                    price: price,
+                    currency: currency
                 },
                 {
                     headers: {

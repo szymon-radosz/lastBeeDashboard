@@ -32,6 +32,12 @@ class OfferListTable extends Component {
                             Type
                         </th>
                         <th scope="col" className="text-center">
+                            Price
+                        </th>
+                        <th scope="col" className="text-center">
+                            Currency
+                        </th>
+                        <th scope="col" className="text-center">
                             Status
                         </th>
                         <th />
