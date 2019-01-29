@@ -19,12 +19,12 @@ class OfferListTable extends Component {
                         <th scope="col" className="text-center">
                             Desc
                         </th>
-                        <th scope="col" className="text-center">
+                        {/*<th scope="col" className="text-center">
                             Page URL
                         </th>
                         <th scope="col" className="text-center">
                             Img URL
-                        </th>
+                        </th>*/}
                         <th scope="col" className="text-center">
                             Brand
                         </th>
@@ -39,6 +39,9 @@ class OfferListTable extends Component {
                         </th>
                         <th scope="col" className="text-center">
                             Status
+                        </th>
+                        <th scope="col" className="text-center">
+                            Confirmed
                         </th>
                         <th />
                     </tr>

@@ -103,7 +103,8 @@ class OfferListMain extends Component {
         type,
         status,
         price,
-        currency
+        currency,
+        confirmed_brand
     ) {
         /*console.log([
             id,
@@ -132,7 +133,8 @@ class OfferListMain extends Component {
                     type: type,
                     status: status,
                     price: price,
-                    currency: currency
+                    currency: currency,
+                    confirmed_brand: confirmed_brand
                 },
                 {
                     headers: {
@@ -163,13 +165,17 @@ class OfferListMain extends Component {
 
     render() {
         return (
-            <div className="OfferListMainContainer">
-                <OfferListTable
-                    offers={this.state.offerList}
-                    updateOffer={this.updateOffer}
-                />
-
-                <nav aria-label="Page navigation example">
+            <div className="OfferListMainWrapper">
+                <div className="OfferListMainContainer">
+                    <OfferListTable
+                        offers={this.state.offerList}
+                        updateOffer={this.updateOffer}
+                    />
+                </div>
+                <nav
+                    className="offerPagination"
+                    aria-label="Page navigation example"
+                >
                     <ul className="pagination">
                         <li
                             className="page-item"

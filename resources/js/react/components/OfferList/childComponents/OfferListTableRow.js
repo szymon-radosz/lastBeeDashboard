@@ -14,6 +14,7 @@ class OfferListTableRow extends Component {
             status: "",
             price: "",
             currency: "",
+            confirmed_brand: "",
             id: 0
         };
 
@@ -36,7 +37,8 @@ class OfferListTableRow extends Component {
             type: this.props.offer.type,
             status: this.props.offer.status,
             price: this.props.offer.price,
-            currency: this.props.offer.currency
+            currency: this.props.offer.currency,
+            confirmed_brand: this.props.offer.confirmed_brand
         });
     }
 
@@ -63,7 +65,7 @@ class OfferListTableRow extends Component {
                         />
                     </div>
                 </td>
-                <td className="text-center">
+                {/*<td className="text-center">
                     <div className="form-group">
                         <input
                             name="page_url"
@@ -82,7 +84,7 @@ class OfferListTableRow extends Component {
                             onChange={this.handleChange}
                         />
                     </div>
-                </td>
+                </td>*/}
                 <td className="text-center">
                     <div className="form-group">
                         <input
@@ -143,7 +145,20 @@ class OfferListTableRow extends Component {
                             <option>{this.state.status}</option>
                             <option>0</option>
                             <option>1</option>
-                            <option>2</option>
+                        </select>
+                    </div>
+                </td>
+                <td className="text-center">
+                    <div className="form-group ">
+                        <select
+                            name="confirmed_brand"
+                            className="form-control"
+                            value={this.state.confirmed_brand}
+                            onChange={this.handleChange}
+                        >
+                            <option>{this.state.confirmed_brand}</option>
+                            <option>0</option>
+                            <option>1</option>
                         </select>
                     </div>
                 </td>
@@ -161,7 +176,8 @@ class OfferListTableRow extends Component {
                                 this.state.type,
                                 this.state.status,
                                 this.state.price,
-                                this.state.currency
+                                this.state.currency,
+                                this.state.confirmed_brand
                             )
                         }
                     >

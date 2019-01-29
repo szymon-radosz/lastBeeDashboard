@@ -81598,7 +81598,7 @@ function (_Component) {
     value: function () {
       var _updateOffer = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, title, description, page_url, img_url, brand, type, status, price, currency) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, title, description, page_url, img_url, brand, type, status, price, currency, confirmed_brand) {
         var updatedOffer;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
@@ -81627,7 +81627,8 @@ function (_Component) {
                   type: type,
                   status: status,
                   price: price,
-                  currency: currency
+                  currency: currency,
+                  confirmed_brand: confirmed_brand
                 }, {
                   headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -81663,7 +81664,7 @@ function (_Component) {
         }, _callee5, this, [[1, 9]]);
       }));
 
-      function updateOffer(_x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11) {
+      function updateOffer(_x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12) {
         return _updateOffer.apply(this, arguments);
       }
 
@@ -81680,11 +81681,14 @@ function (_Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "OfferListMainWrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "OfferListMainContainer"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_childComponents_OfferListTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
         offers: this.state.offerList,
         updateOffer: this.updateOffer
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+        className: "offerPagination",
         "aria-label": "Page navigation example"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
         className: "pagination"
@@ -81798,12 +81802,6 @@ function (_Component) {
       }, "Desc"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
         className: "text-center"
-      }, "Page URL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        scope: "col",
-        className: "text-center"
-      }, "Img URL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        scope: "col",
-        className: "text-center"
       }, "Brand"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
         className: "text-center"
@@ -81816,7 +81814,10 @@ function (_Component) {
       }, "Currency"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
         className: "text-center"
-      }, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.offers.map(function (offer, i) {
+      }, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col",
+        className: "text-center"
+      }, "Confirmed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.offers.map(function (offer, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OfferListTableRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
           offer: offer,
           key: i,
@@ -81887,6 +81888,7 @@ function (_Component) {
       status: "",
       price: "",
       currency: "",
+      confirmed_brand: "",
       id: 0
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -81914,7 +81916,8 @@ function (_Component) {
         type: this.props.offer.type,
         status: this.props.offer.status,
         price: this.props.offer.price,
-        currency: this.props.offer.currency
+        currency: this.props.offer.currency,
+        confirmed_brand: this.props.offer.confirmed_brand
       });
     }
   }, {
@@ -81941,24 +81944,6 @@ function (_Component) {
         className: "OfferListTableRowDesc form-control",
         name: "description",
         value: this.state.description,
-        onChange: this.handleChange
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "page_url",
-        className: "OfferListTableRowPageUrl form-control",
-        value: this.state.page_url,
-        onChange: this.handleChange
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "img_url",
-        className: "OfferListTableRowImgUrl form-control",
-        value: this.state.img_url,
         onChange: this.handleChange
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "text-center"
@@ -82005,12 +81990,21 @@ function (_Component) {
         className: "form-control",
         value: this.state.status,
         onChange: this.handleChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "2")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "confirmed_brand",
+        className: "form-control",
+        value: this.state.confirmed_brand,
+        onChange: this.handleChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.confirmed_brand), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "btn blueBtn",
         onClick: function onClick() {
-          return _this2.props.updateOffer(_this2.state.id, _this2.state.title, _this2.state.description, _this2.state.page_url, _this2.state.img_url, _this2.state.brand, _this2.state.type, _this2.state.status, _this2.state.price, _this2.state.currency);
+          return _this2.props.updateOffer(_this2.state.id, _this2.state.title, _this2.state.description, _this2.state.page_url, _this2.state.img_url, _this2.state.brand, _this2.state.type, _this2.state.status, _this2.state.price, _this2.state.currency, _this2.state.confirmed_brand);
         }
       }, "Save")));
     }

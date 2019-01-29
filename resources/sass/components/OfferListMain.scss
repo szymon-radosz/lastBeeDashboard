@@ -1,22 +1,36 @@
-.OfferListMainContainer {
-    display: block;
-    overflow-x: scroll;
+.offerPagination {
+    position: absolute;
+    bottom: 0;
 
-    .offerTable {
-        .OfferListTableRowTr {
-            background-color: #cccccc85;
-        }
+    .pagination {
+        margin: 5px 0;
+    }
+}
+.OfferListMainWrapper {
+    height: calc(100vh - 60px);
 
-        .OfferListTableRowBrand,
-        .OfferListTableRowImgUrl,
-        .OfferListTableRowPageUrl {
-            width: 100px;
-        }
+    .OfferListMainContainer {
+        display: block;
+        overflow: scroll;
+        height: calc(100vh - 100px);
 
-        .OfferListTableRowDesc,
-        .OfferListTableRowTitle {
-            height: 200px;
-            resize: none;
+        .offerTable {
+            height: 100%;
+            .OfferListTableRowTr {
+                background-color: #cccccc38;
+            }
+
+            .OfferListTableRowBrand,
+            .OfferListTableRowImgUrl,
+            .OfferListTableRowPageUrl {
+                width: 100px;
+            }
+
+            .OfferListTableRowDesc,
+            .OfferListTableRowTitle {
+                height: 200px;
+                resize: none;
+            }
         }
     }
 }
