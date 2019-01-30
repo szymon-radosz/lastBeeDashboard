@@ -14,6 +14,18 @@ class OfferListMain extends Component {
         this.loadOffers = this.loadOffers.bind(this);
         this.setPage = this.setPage.bind(this);
         this.updateOffer = this.updateOffer.bind(this);
+        this.updateAllOffers = this.updateAllOffers.bind(this);
+        this.handleOfferChange = this.handleOfferChange.bind(this);
+    }
+
+    handleOfferChange(offerIndex, propertyLabel, propertyValue) {
+        console.log([offerIndex, propertyLabel, propertyValue]);
+
+        let offersCopy = JSON.parse(JSON.stringify(this.state.offerList));
+        offersCopy[offerIndex][propertyLabel] = propertyValue;
+        this.setState({
+            offerList: offersCopy
+        });
     }
 
     async setPage(value) {
@@ -93,6 +105,53 @@ class OfferListMain extends Component {
         }
     }
 
+    async updateAllOffers() {
+        const offers = this.state.offerList;
+
+        offers.map(async (elem, i) => {
+            let updatedOffer;
+
+            this.props.switchLoader(true);
+
+            try {
+                updatedOffer = await axios.post(
+                    `${this.props.appPath}/api/updateOffer`,
+                    {
+                        id: elem.id,
+                        title: elem.title,
+                        description: elem.description,
+                        page_url: elem.page_url,
+                        img_url: elem.img_url,
+                        brand: elem.brand,
+                        type: elem.type,
+                        status: elem.status,
+                        price: elem.price,
+                        currency: elem.currency,
+                        confirmed_brand: elem.confirmed_brand
+                    },
+                    {
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            )
+                        }
+                    }
+                );
+
+                if (updatedOffer.status == 200) {
+                    console.log(updatedOffer.status);
+                }
+
+                if (i == offers.length - 1) {
+                    this.props.switchLoader(false);
+                    this.props.showAlertSuccess("Zakonczono");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    }
+
     async updateOffer(
         id,
         title,
@@ -166,10 +225,18 @@ class OfferListMain extends Component {
     render() {
         return (
             <div className="OfferListMainWrapper">
+                <div
+                    className="btn blueBtn saveAllBtn"
+                    onClick={this.updateAllOffers}
+                >
+                    Save All
+                </div>
+
                 <div className="OfferListMainContainer">
                     <OfferListTable
                         offers={this.state.offerList}
                         updateOffer={this.updateOffer}
+                        handleOfferChange={this.handleOfferChange}
                     />
                 </div>
                 <nav

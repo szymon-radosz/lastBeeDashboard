@@ -81180,7 +81180,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
-var appPath = "https://last-bee.com/";
+var appPath = "http://127.0.0.1:8080/";
 
 var Main =
 /*#__PURE__*/
@@ -81402,10 +81402,22 @@ function (_Component) {
     _this.loadOffers = _this.loadOffers.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.setPage = _this.setPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.updateOffer = _this.updateOffer.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.updateAllOffers = _this.updateAllOffers.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleOfferChange = _this.handleOfferChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(OfferListMain, [{
+    key: "handleOfferChange",
+    value: function handleOfferChange(offerIndex, propertyLabel, propertyValue) {
+      console.log([offerIndex, propertyLabel, propertyValue]);
+      var offersCopy = JSON.parse(JSON.stringify(this.state.offerList));
+      offersCopy[offerIndex][propertyLabel] = propertyValue;
+      this.setState({
+        offerList: offersCopy
+      });
+    }
+  }, {
     key: "setPage",
     value: function () {
       var _setPage = _asyncToGenerator(
@@ -81594,15 +81606,110 @@ function (_Component) {
       return prevPage;
     }()
   }, {
+    key: "updateAllOffers",
+    value: function () {
+      var _updateAllOffers = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var _this2 = this;
+
+        var offers;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                offers = this.state.offerList;
+                offers.map(
+                /*#__PURE__*/
+                function () {
+                  var _ref = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(elem, i) {
+                    var updatedOffer;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                      while (1) {
+                        switch (_context5.prev = _context5.next) {
+                          case 0:
+                            _this2.props.switchLoader(true);
+
+                            _context5.prev = 1;
+                            _context5.next = 4;
+                            return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(_this2.props.appPath, "/api/updateOffer"), {
+                              id: elem.id,
+                              title: elem.title,
+                              description: elem.description,
+                              page_url: elem.page_url,
+                              img_url: elem.img_url,
+                              brand: elem.brand,
+                              type: elem.type,
+                              status: elem.status,
+                              price: elem.price,
+                              currency: elem.currency,
+                              confirmed_brand: elem.confirmed_brand
+                            }, {
+                              headers: {
+                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                              }
+                            });
+
+                          case 4:
+                            updatedOffer = _context5.sent;
+
+                            if (updatedOffer.status == 200) {
+                              console.log(updatedOffer.status);
+                            }
+
+                            if (i == offers.length - 1) {
+                              _this2.props.switchLoader(false);
+
+                              _this2.props.showAlertSuccess("Zakonczono");
+                            }
+
+                            _context5.next = 12;
+                            break;
+
+                          case 9:
+                            _context5.prev = 9;
+                            _context5.t0 = _context5["catch"](1);
+                            console.log(_context5.t0);
+
+                          case 12:
+                          case "end":
+                            return _context5.stop();
+                        }
+                      }
+                    }, _callee5, this, [[1, 9]]);
+                  }));
+
+                  return function (_x2, _x3) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
+
+              case 2:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function updateAllOffers() {
+        return _updateAllOffers.apply(this, arguments);
+      }
+
+      return updateAllOffers;
+    }()
+  }, {
     key: "updateOffer",
     value: function () {
       var _updateOffer = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, title, description, page_url, img_url, brand, type, status, price, currency, confirmed_brand) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(id, title, description, page_url, img_url, brand, type, status, price, currency, confirmed_brand) {
         var updatedOffer;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context7.prev = _context7.next) {
               case 0:
                 /*console.log([
                     id,
@@ -81615,8 +81722,8 @@ function (_Component) {
                     status
                 ]);*/
                 this.props.switchLoader(true);
-                _context5.prev = 1;
-                _context5.next = 4;
+                _context7.prev = 1;
+                _context7.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(this.props.appPath, "/api/updateOffer"), {
                   id: id,
                   title: title,
@@ -81636,7 +81743,7 @@ function (_Component) {
                 });
 
               case 4:
-                updatedOffer = _context5.sent;
+                updatedOffer = _context7.sent;
 
                 if (updatedOffer.status == 200) {
                   this.props.showAlertSuccess("Updated records.");
@@ -81645,26 +81752,26 @@ function (_Component) {
                 }
 
                 console.log(updatedOffer);
-                _context5.next = 12;
+                _context7.next = 12;
                 break;
 
               case 9:
-                _context5.prev = 9;
-                _context5.t0 = _context5["catch"](1);
-                console.log(_context5.t0);
+                _context7.prev = 9;
+                _context7.t0 = _context7["catch"](1);
+                console.log(_context7.t0);
 
               case 12:
                 this.props.switchLoader(false);
 
               case 13:
               case "end":
-                return _context5.stop();
+                return _context7.stop();
             }
           }
-        }, _callee5, this, [[1, 9]]);
+        }, _callee7, this, [[1, 9]]);
       }));
 
-      function updateOffer(_x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12) {
+      function updateOffer(_x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12, _x13, _x14) {
         return _updateOffer.apply(this, arguments);
       }
 
@@ -81678,15 +81785,19 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "OfferListMainWrapper"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "btn blueBtn saveAllBtn",
+        onClick: this.updateAllOffers
+      }, "Save All"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "OfferListMainContainer"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_childComponents_OfferListTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
         offers: this.state.offerList,
-        updateOffer: this.updateOffer
+        updateOffer: this.updateOffer,
+        handleOfferChange: this.handleOfferChange
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
         className: "offerPagination",
         "aria-label": "Page navigation example"
@@ -81695,14 +81806,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "page-item",
         onClick: function onClick() {
-          return _this2.prevPage();
+          return _this3.prevPage();
         }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "page-link"
       }, "<")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "page-item",
         onClick: function onClick() {
-          return _this2.setPage(1);
+          return _this3.setPage(1);
         }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "page-link"
@@ -81711,19 +81822,19 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "text",
         onBlur: function onBlur(event) {
-          return _this2.setPage(event.target.value);
+          return _this3.setPage(event.target.value);
         }
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "page-item",
         onClick: function onClick() {
-          return _this2.setPage(_this2.state.maxPage);
+          return _this3.setPage(_this3.state.maxPage);
         }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "page-link"
       }, this.state.maxPage)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
         className: "page-item",
         onClick: function onClick() {
-          return _this2.nextPage();
+          return _this3.nextPage();
         }
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "page-link"
@@ -81821,7 +81932,9 @@ function (_Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_OfferListTableRow__WEBPACK_IMPORTED_MODULE_1__["default"], {
           offer: offer,
           key: i,
-          updateOffer: _this2.props.updateOffer
+          offerIndex: i,
+          updateOffer: _this2.props.updateOffer,
+          handleOfferChange: _this2.props.handleOfferChange
         });
       })));
     }
@@ -81843,9 +81956,17 @@ function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -81925,83 +82046,307 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-        className: "OfferListTableRowTr"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+        className: this.props.offer.confirmed_brand == 1 ? "OfferListTableRowTr" : "OfferListTableRowRed"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         className: "OfferListTableRowTitle form-control",
         name: "title",
         value: this.state.title,
-        onChange: this.handleChange
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "title", _this2.state.title);
+
+                  case 4:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+
+          return function (_x) {
+            return _ref.apply(this, arguments);
+          };
+        }()
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
         className: "OfferListTableRowDesc form-control",
         name: "description",
         value: this.state.description,
-        onChange: this.handleChange
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref2 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context2.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "description", _this2.state.description);
+
+                  case 4:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+
+          return function (_x2) {
+            return _ref2.apply(this, arguments);
+          };
+        }()
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         name: "brand",
         className: "OfferListTableRowBrand form-control",
         value: this.state.brand,
-        onChange: this.handleChange
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref3 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context3.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "brand", _this2.state.brand);
+
+                  case 4:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
+
+          return function (_x3) {
+            return _ref3.apply(this, arguments);
+          };
+        }()
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         name: "type",
         className: "OfferListTableRowType form-control",
         value: this.state.type,
-        onChange: this.handleChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Flights"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Vacations"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Accomodation")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref4 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    _context4.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context4.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "type", _this2.state.type);
+
+                  case 4:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
+
+          return function (_x4) {
+            return _ref4.apply(this, arguments);
+          };
+        }()
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, this.state.type), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Flights"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Vacations"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Accomodation")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         name: "price",
         className: "OfferListTableRowBrand form-control",
         value: this.state.price,
-        onChange: this.handleChange
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref5 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    _context5.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context5.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "price", _this2.state.price);
+
+                  case 4:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
+          }));
+
+          return function (_x5) {
+            return _ref5.apply(this, arguments);
+          };
+        }()
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group "
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         name: "currency",
         className: "form-control",
         value: this.state.currency,
-        onChange: this.handleChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.currency), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "GBP")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref6 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                    _context6.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context6.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "currency", _this2.state.currency);
+
+                  case 4:
+                  case "end":
+                    return _context6.stop();
+                }
+              }
+            }, _callee6, this);
+          }));
+
+          return function (_x6) {
+            return _ref6.apply(this, arguments);
+          };
+        }()
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, this.state.currency), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "USD"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "GBP")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group "
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         name: "status",
         className: "form-control",
         value: this.state.status,
-        onChange: this.handleChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref7 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+              while (1) {
+                switch (_context7.prev = _context7.next) {
+                  case 0:
+                    _context7.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context7.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "status", _this2.state.status);
+
+                  case 4:
+                  case "end":
+                    return _context7.stop();
+                }
+              }
+            }, _callee7, this);
+          }));
+
+          return function (_x7) {
+            return _ref7.apply(this, arguments);
+          };
+        }()
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, this.state.status), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group "
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
         name: "confirmed_brand",
         className: "form-control",
         value: this.state.confirmed_brand,
-        onChange: this.handleChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, this.state.confirmed_brand), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        onChange:
+        /*#__PURE__*/
+        function () {
+          var _ref8 = _asyncToGenerator(
+          /*#__PURE__*/
+          _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8(e) {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                    _context8.next = 2;
+                    return _this2.handleChange(e);
+
+                  case 2:
+                    _context8.next = 4;
+                    return _this2.props.handleOfferChange(_this2.props.offerIndex, "confirmed_brand", _this2.state.confirmed_brand);
+
+                  case 4:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee8, this);
+          }));
+
+          return function (_x8) {
+            return _ref8.apply(this, arguments);
+          };
+        }()
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, this.state.confirmed_brand), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "btn blueBtn",
         onClick: function onClick() {
           return _this2.props.updateOffer(_this2.state.id, _this2.state.title, _this2.state.description, _this2.state.page_url, _this2.state.img_url, _this2.state.brand, _this2.state.type, _this2.state.status, _this2.state.price, _this2.state.currency, _this2.state.confirmed_brand);
@@ -82011,7 +82356,7 @@ function (_Component) {
   }]);
 
   return OfferListTableRow;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (OfferListTableRow);
 

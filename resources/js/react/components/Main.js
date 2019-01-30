@@ -5,7 +5,7 @@ import DashboardMain from "./DashboardMain/DashboardMain";
 import OfferListMain from "./OfferList/OfferListMain";
 import loader from "./../../../images/loader.svg";
 
-const appPath = "https://last-bee.com/";
+const appPath = "http://127.0.0.1:8080/";
 
 class Main extends Component {
     constructor(props) {

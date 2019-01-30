@@ -44,14 +44,27 @@ class OfferListTableRow extends Component {
 
     render() {
         return (
-            <tr className="OfferListTableRowTr">
+            <tr
+                className={
+                    this.props.offer.confirmed_brand == 1
+                        ? "OfferListTableRowTr"
+                        : "OfferListTableRowRed"
+                }
+            >
                 <td className="text-center">
                     <div className="form-group">
                         <textarea
                             className="OfferListTableRowTitle form-control"
                             name="title"
                             value={this.state.title}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "title",
+                                    this.state.title
+                                );
+                            }}
                         />
                     </div>
                 </td>
@@ -61,7 +74,14 @@ class OfferListTableRow extends Component {
                             className="OfferListTableRowDesc form-control"
                             name="description"
                             value={this.state.description}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "description",
+                                    this.state.description
+                                );
+                            }}
                         />
                     </div>
                 </td>
@@ -91,7 +111,14 @@ class OfferListTableRow extends Component {
                             name="brand"
                             className="OfferListTableRowBrand form-control"
                             value={this.state.brand}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "brand",
+                                    this.state.brand
+                                );
+                            }}
                         />
                     </div>
                 </td>
@@ -101,7 +128,14 @@ class OfferListTableRow extends Component {
                             name="type"
                             className="OfferListTableRowType form-control"
                             value={this.state.type}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "type",
+                                    this.state.type
+                                );
+                            }}
                         >
                             <option>{this.state.type}</option>
                             <option>Flights</option>
@@ -116,7 +150,14 @@ class OfferListTableRow extends Component {
                             name="price"
                             className="OfferListTableRowBrand form-control"
                             value={this.state.price}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "price",
+                                    this.state.price
+                                );
+                            }}
                         />
                     </div>
                 </td>
@@ -126,7 +167,14 @@ class OfferListTableRow extends Component {
                             name="currency"
                             className="form-control"
                             value={this.state.currency}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "currency",
+                                    this.state.currency
+                                );
+                            }}
                         >
                             <option>{this.state.currency}</option>
                             <option>USD</option>
@@ -140,7 +188,14 @@ class OfferListTableRow extends Component {
                             name="status"
                             className="form-control"
                             value={this.state.status}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "status",
+                                    this.state.status
+                                );
+                            }}
                         >
                             <option>{this.state.status}</option>
                             <option>0</option>
@@ -154,7 +209,14 @@ class OfferListTableRow extends Component {
                             name="confirmed_brand"
                             className="form-control"
                             value={this.state.confirmed_brand}
-                            onChange={this.handleChange}
+                            onChange={async e => {
+                                await this.handleChange(e);
+                                await this.props.handleOfferChange(
+                                    this.props.offerIndex,
+                                    "confirmed_brand",
+                                    this.state.confirmed_brand
+                                );
+                            }}
                         >
                             <option>{this.state.confirmed_brand}</option>
                             <option>0</option>

@@ -52,7 +52,9 @@ class OfferListTable extends Component {
                             <OfferListTableRow
                                 offer={offer}
                                 key={i}
+                                offerIndex={i}
                                 updateOffer={this.props.updateOffer}
+                                handleOfferChange={this.props.handleOfferChange}
                             />
                         );
                     })}

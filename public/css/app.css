@@ -16652,6 +16652,13 @@ section {
   height: calc(100vh - 60px);
 }
 
+.OfferListMainWrapper .saveAllBtn {
+  position: absolute;
+  bottom: 3px;
+  width: 130px;
+  right: 15px;
+}
+
 .OfferListMainWrapper .OfferListMainContainer {
   display: block;
   overflow: scroll;
@@ -16664,6 +16671,10 @@ section {
 
 .OfferListMainWrapper .OfferListMainContainer .offerTable .OfferListTableRowTr {
   background-color: #cccccc38;
+}
+
+.OfferListMainWrapper .OfferListMainContainer .offerTable .OfferListTableRowRed {
+  background-color: #ff00003d;
 }
 
 .OfferListMainWrapper .OfferListMainContainer .offerTable .OfferListTableRowBrand,
