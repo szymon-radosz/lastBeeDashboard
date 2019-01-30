@@ -19,6 +19,15 @@ class OfferListTableRow extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.changeCheckbox = this.changeCheckbox.bind(this);
+    }
+
+    changeCheckbox() {
+        if (this.state.status == 1) {
+            this.setState({ status: 0 });
+        } else {
+            this.setState({ status: 1 });
+        }
     }
 
     handleChange(event) {
@@ -184,7 +193,7 @@ class OfferListTableRow extends Component {
                 </td>
                 <td className="text-center">
                     <div className="form-group ">
-                        <select
+                        {/*<select
                             name="status"
                             className="form-control"
                             value={this.state.status}
@@ -200,7 +209,26 @@ class OfferListTableRow extends Component {
                             <option>{this.state.status}</option>
                             <option>0</option>
                             <option>1</option>
-                        </select>
+                        </select>*/}
+
+                        <div className="checkbox">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    onChange={async e => {
+                                        await this.changeCheckbox();
+                                        await this.props.handleOfferChange(
+                                            this.props.offerIndex,
+                                            "status",
+                                            this.state.status
+                                        );
+                                    }}
+                                    checked={
+                                        this.state.status == 1 ? true : false
+                                    }
+                                />
+                            </label>
+                        </div>
                     </div>
                 </td>
                 <td className="text-center">

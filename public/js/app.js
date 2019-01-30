@@ -81180,7 +81180,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
-var appPath = "http://127.0.0.1:8080/";
+var appPath = "https://last-bee.com/";
 
 var Main =
 /*#__PURE__*/
@@ -82013,10 +82013,24 @@ function (_Component) {
       id: 0
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.changeCheckbox = _this.changeCheckbox.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(OfferListTableRow, [{
+    key: "changeCheckbox",
+    value: function changeCheckbox() {
+      if (this.state.status == 1) {
+        this.setState({
+          status: 0
+        });
+      } else {
+        this.setState({
+          status: 1
+        });
+      }
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(event) {
       var _event$target = event.target,
@@ -82274,10 +82288,10 @@ function (_Component) {
         className: "text-center"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group "
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        name: "status",
-        className: "form-control",
-        value: this.state.status,
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "checkbox"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "checkbox",
         onChange:
         /*#__PURE__*/
         function () {
@@ -82289,7 +82303,7 @@ function (_Component) {
                 switch (_context7.prev = _context7.next) {
                   case 0:
                     _context7.next = 2;
-                    return _this2.handleChange(e);
+                    return _this2.changeCheckbox();
 
                   case 2:
                     _context7.next = 4;
@@ -82306,8 +82320,9 @@ function (_Component) {
           return function (_x7) {
             return _ref7.apply(this, arguments);
           };
-        }()
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, this.state.status), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "0"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "1")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+        }(),
+        checked: this.state.status == 1 ? true : false
+      }))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
         className: "text-center"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group "
