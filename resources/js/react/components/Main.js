@@ -5,7 +5,7 @@ import DashboardMain from "./DashboardMain/DashboardMain";
 import OfferListMain from "./OfferList/OfferListMain";
 import loader from "./../../../images/loader.svg";
 
-const appPath = "https://last-bee.com/";
+const appPath = "https://wyjechani.pl/";
 
 class Main extends Component {
     constructor(props) {
